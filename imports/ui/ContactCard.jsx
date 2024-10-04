@@ -1,11 +1,20 @@
-import React from 'react';
+import React, {memo} from 'react';
 
-export const ContactCard = ({contact}) => {
+export const ContactCard = memo(({contact, showError, showSuccess}) => {
 
     const handleRemoveContact = (e) => {
 
         e.preventDefault()
-        Meteor.call('removeContact', contact._id)
+        Meteor.call('removeContact', contact._id, (errorResponse) => {
+
+            if (errorResponse) {
+    
+                showError({message: errorResponse.error})
+            } else {
+    
+                showSuccess({message: 'Contact Created Successfully!'})
+            }
+        })
     }
 
     return (
@@ -28,4 +37,4 @@ export const ContactCard = ({contact}) => {
             </div>
         </li>
     )
-}
+});

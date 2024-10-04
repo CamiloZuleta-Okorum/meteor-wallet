@@ -14,6 +14,7 @@ export const ContactForm = () => {
     const showError = ({message}) => {
 
         setSuccess("")
+        setError("")
         setError(message)
 
         setTimeout(() => {
@@ -21,9 +22,10 @@ export const ContactForm = () => {
         }, 2500);
     }
 
-    const showSuccess = ({message}) => {
+    const showSuccess = () => {
 
         setError("")
+        setSuccess("")
         setSuccess("Contact Added Successfully!")
 
         setTimeout(() => {
@@ -44,6 +46,7 @@ export const ContactForm = () => {
 
             if (errorResponse) {
 
+                console.log(errorResponse)
                 showError({message: errorResponse.error})
             } else {
                 

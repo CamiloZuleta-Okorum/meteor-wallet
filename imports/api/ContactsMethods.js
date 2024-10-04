@@ -1,32 +1,70 @@
+import { Meteor } from 'meteor/meteor'
 import { ContactsCollection } from "./ContactsCollection";
-
+import { check } from 'meteor/check'
 
 const insertContact = async (contact) => {
 
-    if (contact.name === "" || contact.email === "" || contact.image === "") {
+    try{
 
-        throw new Meteor.Error("All fields are required")
-    }
-    else {
+        if (contact.name === "" || contact.email === "" || contact.image === "") {
 
-        try {
-
-            return await ContactsCollection.insertAsync(contact)
-        } catch (error) {
-
-            throw new Metero.Error(error)
+            throw new Meteor.Error("All fields are required")
         }
+        else {
+
+            try {
+
+                check(contact, {
+                    name: String,
+                    email: String,
+                    image: String,
+                    createdAt: Date
+                });
+
+                try {
+
+                    return await ContactsCollection.insertAsync(contact)
+                } catch (errorDatabase) {
+    
+                    console.log(errorDatabase)
+    
+                    throw new Meteor.Error('Database Error')
+                }
+            } catch (errorCheck) {
+
+                throw new Meteor.Error(errorCheck.error || 'Data Validation Error')
+            }
+        }
+    } catch (errorThrow) {
+
+        throw new Meteor.Error(errorThrow.error || 'Internal Server Error')
     }
 }
 
 const removeContact = async (contactId) => {
 
+    check(contactId, String)
+
     try {
 
-        return await ContactsCollection.removeAsync(contactId)
-    } catch (error) {
+        try {
 
-        throw new Meteor.Error(error)
+            check(contactId, String)
+
+            try {
+
+                return await ContactsCollection.removeAsync(contactId)
+            } catch (errorDatabase) {
+    
+                throw new Meteor.Error('Database Error')
+            }
+        } catch (errorCheck) {
+
+            throw new Meteor.Error(errorCheck.error || 'Data Validation Error')
+        }
+    } catch (errorThrow) {
+
+        throw new Meteor.Error(errorThrow.error || 'Internal Server Error')
     }
 }
 
