@@ -21,7 +21,7 @@ export const ContactCard = ({contact}) => {
                 <div>
                     <a href="#"
                     onClick={(e) => handleRemoveContact(e)}
-                    className="text-white text-xl bg-indigo-500 inline-flex items-center shadow-sm px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-indigo-600">
+                    className="text-white text-xl inline-flex items-center shadow-sm px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-indigo-600 hover:bg-indigo-700">
                         Remove
                     </a>
                 </div>
