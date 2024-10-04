@@ -8,14 +8,14 @@ export const Header = () => {
         <div className="w-full py-6 flex items-center justify-between border-b border-indigo-100 lg:border-none">
           <div className="flex items-center">
             <a href="https://www.youtube.com" target="_blank">
-              <span className="sr-only">Meteor Wallet</span>
+              <span className="sr-only"></span>
               <img
                 className="h-12 w-auto"
                 src="/images/logo.png"
                 alt=""
               />
             </a>
-            <p className="mx-2 text-2xl text-white">Meteor Wallet</p>
+            <p className="mx-2 text-2xl text-white">Wallet APP</p>
           </div>
         </div>
       </nav>

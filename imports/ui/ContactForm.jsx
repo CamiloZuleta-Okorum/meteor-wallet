@@ -1,33 +1,69 @@
 import React, { useState } from 'react'
-import { ContactsCollection } from '../api/ContactsCollection'
- 
+import { Meteor } from 'meteor/meteor'
+import { ErrorAlert, SuccessAlert} from './components/Alerts'
+
 export const ContactForm = () => {
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [image, setImage] = useState("")
 
-    const handleSaveContact = async () => {
+    const [error, setError] = useState("")
+    const [success, setSuccess] = useState("")
 
-        if (!(name === "" || email === "" || image === "")) {
+    const showError = ({message}) => {
 
-            const contact = {
-                name,
-                email,
-                image,
-                createdAt: new Date()
-            }
+        setSuccess("")
+        setError(message)
 
-            await ContactsCollection.insert(contact)
+        setTimeout(() => {
+            setError("");
+        }, 2500);
+    }
 
-            setName("")
-            setEmail("")
-            setImage("")
+    const showSuccess = ({message}) => {
+
+        setError("")
+        setSuccess("Contact Added Successfully!")
+
+        setTimeout(() => {
+            setSuccess("");
+        }, 2500);
+    }
+
+    const handleSaveContact = () => {
+
+        const contact = {
+            name,
+            email,
+            image,
+            createdAt: new Date()
         }
+
+        Meteor.call('insertContact', contact, (errorResponse) => {
+
+            if (errorResponse) {
+
+                showError({message: errorResponse.error})
+            } else {
+                
+                setName("")
+                setEmail("")
+                setImage("")
+
+                showSuccess({message: 'Contact Created Successfully!'})
+            }
+        })
     }
 
     return (
         <form className="mt-6 px-20">
+            {
+                error && <ErrorAlert message={error}/>
+            }
+            {
+                success && <SuccessAlert message={success}/>
+            }
             <div className="grid grid-cols-6 gap-6">
 
                 <div className="col-span-6 sm:col-span-6 lg:col-span-2">
