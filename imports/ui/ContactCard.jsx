@@ -25,7 +25,10 @@ export const ContactCard = memo(({contact, showError, showSuccess}) => {
                 </div>
                 <div className="min-w-0 flex-1">
                     <p className="text-xl font-medium text-gray-900 truncate">{contact.name}</p>
-                    <p className="text-xl font-medium text-gray-500 truncate">{contact.email}</p>
+                    <div className="flex row">
+                        <p className="text-xl font-medium text-gray-500 truncate">{contact.email}</p>
+                        <p className="ml-5 text-xl font-medium text-gray-500 truncate"> Wallet: {contact.walletId}</p>
+                    </div>
                 </div>
                 <div>
                     <a href="#"

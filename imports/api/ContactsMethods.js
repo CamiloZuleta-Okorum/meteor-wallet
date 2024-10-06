@@ -6,7 +6,7 @@ const insertContact = async (contact) => {
 
     try{
 
-        if (contact.name === "" || contact.email === "" || contact.image === "") {
+        if (contact.name === "" || contact.email === "" || contact.image === "" || contact.walletId === "") {
 
             throw new Meteor.Error("All fields are required")
         }
@@ -18,6 +18,7 @@ const insertContact = async (contact) => {
                     name: String,
                     email: String,
                     image: String,
+                    walletId: String,
                     createdAt: Date
                 });
 

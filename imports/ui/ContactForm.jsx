@@ -7,6 +7,7 @@ export const ContactForm = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [image, setImage] = useState("")
+    const [walletId, setWalletId] = useState("")
 
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
@@ -39,6 +40,7 @@ export const ContactForm = () => {
             name,
             email,
             image,
+            walletId,
             createdAt: new Date()
         }
 
@@ -53,6 +55,7 @@ export const ContactForm = () => {
                 setName("")
                 setEmail("")
                 setImage("")
+                setWalletId("")
 
                 showSuccess({message: 'Contact Created Successfully!'})
             }
@@ -101,6 +104,18 @@ export const ContactForm = () => {
                         type="text"
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xl"
+                    />
+                </div>
+
+                <div className="col-span-6">
+                    <label className="block text-lg font-medium text-gray-700">
+                        Wallet ID
+                    </label>
+                    <input
+                        type="text"
+                        value={walletId}
+                        onChange={(e) => setWalletId(e.target.value)}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-xl"
                     />
                 </div>
