@@ -1,16 +1,11 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { Header } from './Header'
-import { Wallet } from './Wallet'
-import { ContactForm } from './ContactForm'
-import { ContactList } from './ContactList'
+import { Router } from './Router'
 
 export const App = () => (
-  <div>
+  <BrowserRouter>
     <Header />
-    <div>
-      <Wallet /> 
-      <ContactForm />
-      <ContactList />
-    </div>   
-  </div>
+    <Router />
+  </BrowserRouter>
 );
