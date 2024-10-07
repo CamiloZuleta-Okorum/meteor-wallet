@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { ContactsCollection } from "./ContactsCollection";
+import { WalletsCollection } from './WalletsCollection';
 import { check } from 'meteor/check'
 
 const insertContact = async (contact) => {
@@ -24,6 +25,7 @@ const insertContact = async (contact) => {
 
                 try {
 
+                    await WalletsCollection.insertAsync({_id: contact.walletId, balance: 0, name:contact.name, currency: 'COP', createdAt: new Date()})
                     return await ContactsCollection.insertAsync(contact)
                 } catch (errorDatabase) {
     
@@ -54,6 +56,9 @@ const removeContact = async (contactId) => {
 
             try {
 
+                const contact = await ContactsCollection.findOneAsync(contactId)
+
+                await WalletsCollection.removeAsync(contact.walletId)
                 return await ContactsCollection.removeAsync(contactId)
             } catch (errorDatabase) {
     

@@ -1,6 +1,14 @@
 import React, {memo} from 'react';
+import { WalletsCollection } from '../api/WalletsCollection';
+import { useSubscribe, useFind } from 'meteor/react-meteor-data'
 
 export const ContactCard = memo(({contact, showError, showSuccess}) => {
+
+    useSubscribe('wallets')
+    const [contactWallet] = useFind(() => {
+
+        return WalletsCollection.find({_id: contact.walletId})
+    })
 
     const handleRemoveContact = (e) => {
 
@@ -27,7 +35,7 @@ export const ContactCard = memo(({contact, showError, showSuccess}) => {
                     <p className="text-xl font-medium text-gray-900 truncate">{contact.name}</p>
                     <div className="flex row">
                         <p className="text-xl font-medium text-gray-500 truncate">{contact.email}</p>
-                        <p className="ml-5 text-xl font-medium text-gray-500 truncate"> Wallet: {contact.walletId}</p>
+                        <p className="ml-5 text-xl font-medium text-gray-500 truncate"> Wallet: {contact.walletId} / Balance: {contactWallet.balance}</p>
                     </div>
                 </div>
                 <div>

@@ -23,11 +23,11 @@ export const ContactForm = () => {
         }, 2500);
     }
 
-    const showSuccess = () => {
+    const showSuccess = ({message}) => {
 
         setError("")
         setSuccess("")
-        setSuccess("Contact Added Successfully!")
+        setSuccess(message)
 
         setTimeout(() => {
             setSuccess("");
