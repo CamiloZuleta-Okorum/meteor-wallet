@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 
-import { ContactsCollection } from '../imports/api/ContactsCollection';
-import '../imports/api/ContactsMethods'
-import { WalletsCollection } from '../imports/api/WalletsCollection';
-import '../imports/api/WalletsMethods'
+import { ContactsCollection } from '../api/ContactsCollection';
+import '../api/ContactsMethods'
+import { WalletsCollection } from '../api/WalletsCollection';
+import '../api/WalletsMethods'
 
 Meteor.startup(async () => {
 

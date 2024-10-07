@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { XCircleIcon, CheckCircleIcon } from '@heroicons/react/solid'
+import { XCircleIcon, CheckCircleIcon } from '@heroicons/react/24/solid'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { SelectDestination } from "./SelectDestination";
 import { useFind, useSubscribe } from 'meteor/react-meteor-data'
